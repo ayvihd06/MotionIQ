@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Color Palette - Light Scientific & Athletic */
+    --bg-primary: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #f1f5f9;
+    --bg-surface-subtle: #f8fafc;
+    
+    --accent-teal: #0891b2;
+    --accent-teal-hover: #0e7490;
+    --accent-cyan: #06b6d4;
+    --accent-emerald: #10b981;
+    --accent-emerald-hover: #059669;
+    --accent-amber: #f59e0b;
+    --accent-rose: #ef4444;
+    --accent-indigo: #6366f1;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --text-subtle: #94a3b8;
+    
+    --border-subtle: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --border-accent: rgba(8, 145, 178, 0.25);
+  }
+
+  body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* MotionIQ Design System Component Classes - Light & Crisp */
+.motion-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem; /* 16px */
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.motion-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+}
+
+.motion-card-elevated {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.07), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Standard Button Variants */
+.motion-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0891b2;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem; /* 14px */
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.625rem; /* 10px */
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px 0 rgba(8, 145, 178, 0.2);
+  cursor: pointer;
+  border: none;
+}
+
+.motion-btn-primary:hover:not(:disabled) {
+  background: #0e7490;
+  box-shadow: 0 4px 6px -1px rgba(8, 145, 178, 0.3);
+  transform: translateY(-1px);
+}
+
+.motion-btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.motion-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.motion-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.motion-btn-secondary:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.motion-btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.motion-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #475569;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.motion-btn-ghost:hover:not(:disabled) {
+  color: #0891b2;
+  background: #f1f5f9;
+}
+
+/* Metric Display values */
+.motion-metric-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.04em;
+}
+
+/* Glassmorphism / Card classes mapped for light theme */
+.glass-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+}
+
+.glass-panel-glow {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 12px 0 rgba(8, 145, 178, 0.08);
+}
+
+.glow-cyan-text {
+  color: #0891b2;
+}
+
+.gradient-text-cyan-emerald {
+  color: #0891b2;
+}
+
+.gradient-border-btn {
+  position: relative;
+  background: #0891b2;
+  border-radius: 0.5rem;
+  padding: 1px;
+}
+
+/* Clean, modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

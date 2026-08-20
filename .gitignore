@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# Virtual Environments
+venv/
+.venv/
+ENV/
+env/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.oxlintrc.json
+
+# Environment variables & secrets
+.env
+*.env
+!.env.example
+
+# MotionIQ Storage & Uploads
+storage/analyses/*
+storage/annotated_videos/*
+storage/raw_videos/*
+storage/reports/*
+storage/temp_videos/*
+!storage/**/.gitkeep
+
+# Test artifacts & generated PDFs/videos
+test_*.mp4
+*.mp4
+*.avi
+*.mov
+backend/visual_check_footstrike.pdf
+backend/verify_wrap.py
+
+# IDE & OS
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
