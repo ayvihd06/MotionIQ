@@ -120,7 +120,7 @@ export const VideoUploadPage: React.FC<VideoUploadPageProps> = ({
       });
       onSuccess(response);
     } catch (err: any) {
-      const msg = err.response?.data?.detail || 'Failed to upload video to server. Please check file format and try again.';
+      const msg = err.response?.data?.detail || err.response?.data?.message || (err.message === 'Network Error' ? 'Network error: backend server is waking up or unreachable. Please wait 15 seconds and try again.' : (err.message || 'Failed to upload video to server. Please check file format and try again.'));
       setErrorMessage(msg);
       setUploading(false);
     }
