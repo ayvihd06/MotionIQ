@@ -78,7 +78,7 @@ class PoseEstimator:
         
         self.model_path = model_path
         self._landmarker = None
-        self._initialize_detector()
+        # Detector is lazily initialized on first frame process to ensure instant server startup
 
     def _initialize_detector(self):
         if not self.model_path.exists():

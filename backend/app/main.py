@@ -30,6 +30,18 @@ def on_startup():
 # Mount local storage directory for video serving
 app.mount("/storage", StaticFiles(directory=str(STORAGE_DIR)), name="storage")
 
+# Root status routes
+@app.get("/")
+@app.get("/api")
+def root():
+    return {
+        "status": "healthy",
+        "service": "MotionIQ AI Biomechanics API",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
 # Include routers
 app.include_router(health.router)
 app.include_router(auth.router)

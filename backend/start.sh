@@ -9,4 +9,4 @@ python -m alembic upgrade head || {
 
 PORT_NUM="${PORT:-10000}"
 echo "Starting Uvicorn on 0.0.0.0:${PORT_NUM}..."
-exec uvicorn app.main:app --host 0.0.0.0 --port "${PORT_NUM}" --workers 2
+exec uvicorn app.main:app --host 0.0.0.0 --port "${PORT_NUM}" --log-level info
