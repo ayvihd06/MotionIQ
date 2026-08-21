@@ -65,5 +65,5 @@ PREFERRED_HEIGHT = 1080
 MAX_FILE_SIZE_MB = 150
 ALLOWED_EXTENSIONS = {".mp4", ".mov", ".avi", ".m4v", ".webm"}
 
-PORT = int(os.getenv("PORT", 8000))
+PORT = int(os.getenv("PORT", 10000))
 HOST = os.getenv("HOST", "0.0.0.0")
