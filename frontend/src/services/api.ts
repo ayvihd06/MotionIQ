@@ -21,7 +21,7 @@ import type {
   PersonalizedWeeklySummaryResponse
 } from '../types';
 
-const rawApiBase = (import.meta.env.VITE_API_URL as string | undefined) || '/api';
+const rawApiBase = (import.meta.env.VITE_API_URL as string | undefined) || 'https://motioniq-api.onrender.com/api';
 export const API_BASE = rawApiBase.replace(/\/+$/, '');
 
 /**
