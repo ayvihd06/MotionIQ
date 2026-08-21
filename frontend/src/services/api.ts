@@ -21,7 +21,28 @@ import type {
   PersonalizedWeeklySummaryResponse
 } from '../types';
 
-const API_BASE = '/api';
+const rawApiBase = (import.meta.env.VITE_API_URL as string | undefined) || '/api';
+export const API_BASE = rawApiBase.replace(/\/+$/, '');
+
+/**
+ * Resolves a media or file URL (relative or absolute) against the configured backend host.
+ */
+export const resolveMediaUrl = (url: string | undefined | null): string => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:') || url.startsWith('data:')) {
+    return url;
+  }
+  // If API_BASE is absolute (e.g. https://motioniq-backend.onrender.com/api), resolve against its origin
+  if (API_BASE.startsWith('http')) {
+    try {
+      const origin = new URL(API_BASE).origin;
+      return `${origin}${url.startsWith('/') ? url : `/${url}`}`;
+    } catch {
+      return url;
+    }
+  }
+  return url;
+};
 
 // Support cookies for session-based auth
 axios.defaults.withCredentials = true;

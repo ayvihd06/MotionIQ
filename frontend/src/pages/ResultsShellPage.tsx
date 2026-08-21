@@ -9,7 +9,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid
 } from 'recharts';
 import type { AnalysisResultResponse, WorkflowStep } from '../types';
-import { api } from '../services/api';
+import { api, resolveMediaUrl } from '../services/api';
 import { WhatChangedSection } from '../components/WhatChangedSection';
 import { PersonalizedRecommendationsSection } from '../components/PersonalizedRecommendationsSection';
 
@@ -342,7 +342,7 @@ export const ResultsShellPage: React.FC<ResultsShellPageProps> = ({
               {result.annotated_video_url && !videoError ? (
                 <video
                   ref={videoRef}
-                  src={result.annotated_video_url}
+                  src={resolveMediaUrl(result.annotated_video_url)}
                   controls
                   autoPlay
                   loop

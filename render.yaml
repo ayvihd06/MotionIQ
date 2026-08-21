@@ -1,0 +1,36 @@
+services:
+  # MotionIQ Backend Web Service (FastAPI + OpenCV + MediaPipe)
+  - type: web
+    name: motioniq-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: motioniq-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: AUTH_COOKIE_SECURE
+        value: "true"
+      - key: AUTH_COOKIE_SAMESITE
+        value: none
+      - key: CORS_ORIGINS
+        value: "http://localhost:5173,http://localhost:3000,https://*.vercel.app"
+      - key: VIDEO_RETENTION_DEFAULT
+        value: "false"
+
+# Render Managed PostgreSQL Database
+databases:
+  - name: motioniq-db
+    databaseName: stridesense_db
+    user: stridesense_user
+    plan: free
+    region: oregon
+    ipAllowList: []

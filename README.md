@@ -182,6 +182,17 @@ Open your browser and navigate to:
 
 ---
 
+## 🌐 Production Cloud Deployment
+
+MotionIQ is configured for seamless split-stack cloud deployment:
+- **Backend & Database**: **Render** (FastAPI Docker Web Service + Managed PostgreSQL 16 via [`render.yaml`](render.yaml))
+- **Frontend**: **Vercel** (React + Vite SPA with Edge CDN via [`frontend/vercel.json`](frontend/vercel.json))
+- **Self-Hosted / VPS**: **Docker Compose** multi-container setup via [`docker-compose.prod.yml`](docker-compose.prod.yml)
+
+👉 **For step-by-step instructions, see the complete [Production Deployment Guide (DEPLOYMENT.md)](DEPLOYMENT.md).**
+
+---
+
 ## 🧪 Testing & Quality Assurance
 
 ### Run Backend Test Suite (81 Tests)

@@ -1,0 +1,68 @@
+services:
+  # 1. PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: motioniq_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-stridesense_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-stridesense_password}
+      POSTGRES_DB: ${POSTGRES_DB:-stridesense_db}
+    volumes:
+      - motioniq_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-stridesense_user} -d ${POSTGRES_DB:-stridesense_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - motioniq_network
+
+  # 2. FastAPI Backend & Kinematics Engine
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: motioniq_backend
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-stridesense_user}:${POSTGRES_PASSWORD:-stridesense_password}@postgres:5432/${POSTGRES_DB:-stridesense_db}
+      SECRET_KEY: ${SECRET_KEY:-motioniq-production-secret-key-change-this-in-env}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-1440}
+      AUTH_COOKIE_NAME: stridesense_session
+      AUTH_COOKIE_SECURE: "false"
+      AUTH_COOKIE_SAMESITE: "lax"
+      VIDEO_RETENTION_DEFAULT: ${VIDEO_RETENTION_DEFAULT:-false}
+      CORS_ORIGINS: "http://localhost,http://localhost:80,http://localhost:5173"
+      PORT: 8000
+    volumes:
+      - motioniq_storage:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - motioniq_network
+
+  # 3. Frontend & Nginx Reverse Proxy
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: motioniq_frontend
+    restart: always
+    ports:
+      - "${PORT:-80}:80"
+    depends_on:
+      - backend
+    networks:
+      - motioniq_network
+
+volumes:
+  motioniq_pgdata:
+    name: motioniq_pgdata
+  motioniq_storage:
+    name: motioniq_storage
+
+networks:
+  motioniq_network:
+    name: motioniq_network

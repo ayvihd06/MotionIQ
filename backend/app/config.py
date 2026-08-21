@@ -19,6 +19,9 @@ DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "postgresql://stridesense_user:stridesense_password@localhost:5432/stridesense_db"
 )
+# Render and some cloud providers use postgres:// which SQLAlchemy 2.0 requires as postgresql://
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # Authentication & Security
 SECRET_KEY = os.getenv("SECRET_KEY", "stridesense-local-dev-jwt-key-2026-secure")
@@ -26,6 +29,20 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440")) # 24 hours
 AUTH_COOKIE_NAME = os.getenv("AUTH_COOKIE_NAME", "stridesense_session")
 AUTH_COOKIE_SECURE = os.getenv("AUTH_COOKIE_SECURE", "false").lower() in ("true", "1", "yes")
+AUTH_COOKIE_SAMESITE = os.getenv("AUTH_COOKIE_SAMESITE", "lax").lower()
+
+# CORS Allowed Origins
+cors_env = os.getenv("CORS_ORIGINS", "")
+if cors_env:
+    CORS_ORIGINS = [origin.strip() for origin in cors_env.split(",") if origin.strip()]
+else:
+    CORS_ORIGINS = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+        "http://localhost:80",
+        "http://localhost"
+    ]
 
 # Privacy & Video Lifecycle
 # By default, videos are deleted after biomechanical extraction

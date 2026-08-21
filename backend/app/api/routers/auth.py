@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
 from sqlalchemy.orm import Session
 
 from app.config import (
-    AUTH_COOKIE_NAME, AUTH_COOKIE_SECURE, ACCESS_TOKEN_EXPIRE_MINUTES
+    AUTH_COOKIE_NAME, AUTH_COOKIE_SECURE, AUTH_COOKIE_SAMESITE, ACCESS_TOKEN_EXPIRE_MINUTES
 )
 from app.db.session import get_db
 from app.db.models import User, UserProfile
@@ -26,7 +26,7 @@ def set_auth_cookie(response: Response, token: str):
         expires=max_age,
         httponly=True,
         secure=AUTH_COOKIE_SECURE,
-        samesite="lax",
+        samesite=AUTH_COOKIE_SAMESITE,
         path="/"
     )
 
@@ -36,7 +36,7 @@ def clear_auth_cookie(response: Response):
         key=AUTH_COOKIE_NAME,
         httponly=True,
         secure=AUTH_COOKIE_SECURE,
-        samesite="lax",
+        samesite=AUTH_COOKIE_SAMESITE,
         path="/"
     )
 
