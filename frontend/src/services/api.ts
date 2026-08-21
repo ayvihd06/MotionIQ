@@ -21,8 +21,12 @@ import type {
   PersonalizedWeeklySummaryResponse
 } from '../types';
 
-const rawApiBase = (import.meta.env.VITE_API_URL as string | undefined) || 'https://motioniq-api.onrender.com/api';
+let rawApiBase = (import.meta.env.VITE_API_URL as string | undefined);
+if (!rawApiBase || !rawApiBase.startsWith('http')) {
+  rawApiBase = 'https://motioniq-api.onrender.com/api';
+}
 export const API_BASE = rawApiBase.replace(/\/+$/, '');
+console.log(`[MotionIQ] Connected to Backend: ${API_BASE}`);
 
 /**
  * Resolves a media or file URL (relative or absolute) against the configured backend host.
